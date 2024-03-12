@@ -11,7 +11,7 @@ export default function Home(){
         <Head> 
         </Head>
         <main> 
-            <h1> hello </h1> 
+            <h1 className="font-thin text-5xl"> hello </h1> 
         </main>
         </>
     ) 
