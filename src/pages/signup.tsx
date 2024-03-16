@@ -29,19 +29,6 @@ export const getServerSideProps: GetServerSideProps = async (req) => {
       },
     };
   }
-  try{
-  const res = await api.get("/user/get");
-  if (res.data.users.length > 0) {
-    return {
-      redirect: {
-        destination: "/signin",
-        permanent: false,
-      },
-    };
-  }
-  }catch(error) {
-      console.log(error); 
-  }
   return {
     props: {},
   };

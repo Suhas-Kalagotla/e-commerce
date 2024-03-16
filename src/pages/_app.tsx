@@ -13,10 +13,20 @@ export default function App({
   const router = useRouter();
   return (
       <>
+        <SessionProvider session={session}>
+        {router.pathname !== "/signin" && router.pathname !== "/signup" ? (
+            <>
             <Navbar/>
               <main className=" p-4 md:p-6 bg-gray-300">
                   <Component {...pageProps} />
               </main>
+            </>
+        ):(
+              <main className=" p-4 md:p-6 bg-gray-300">
+                  <Component {...pageProps} />
+              </main>
+        )}
+        </SessionProvider>
       </>
   );
 }

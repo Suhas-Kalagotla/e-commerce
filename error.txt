@@ -1,0 +1,50 @@
+ [33m[1m⚠[22m[39m Fast Refresh had to perform a full reload. Read more: https://nextjs.org/docs/messages/fast-refresh-reload
+ [33m[1m⚠[22m[39m Fast Refresh had to perform a full reload. Read more: https://nextjs.org/docs/messages/fast-refresh-reload
+[next-auth][error][CLIENT_FETCH_ERROR] 
+https://next-auth.js.org/errors#client_fetch_error Unexpected token '<', "<!DOCTYPE "... is not valid JSON {
+  error: {
+    message: `Unexpected token '<', "<!DOCTYPE "... is not valid JSON`,
+    stack: `SyntaxError: Unexpected token '<', "<!DOCTYPE "... is not valid JSON\n` +
+      '    at JSON.parse (<anonymous>)\n' +
+      '    at parseJSONFromBytes (node:internal/deps/undici/undici:5419:19)\n' +
+      '    at successSteps (node:internal/deps/undici/undici:5390:27)\n' +
+      '    at fullyReadBody (node:internal/deps/undici/undici:1501:9)\n' +
+      '    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)\n' +
+      '    at async specConsumeBody (node:internal/deps/undici/undici:5399:7)',
+    name: 'SyntaxError'
+  },
+  url: 'http://localhost:3000/api/auth/session',
+  message: `Unexpected token '<', "<!DOCTYPE "... is not valid JSON`
+}
+[next-auth][error][CLIENT_FETCH_ERROR] 
+https://next-auth.js.org/errors#client_fetch_error Unexpected token '<', "<!DOCTYPE "... is not valid JSON {
+  error: {
+    message: `Unexpected token '<', "<!DOCTYPE "... is not valid JSON`,
+    stack: `SyntaxError: Unexpected token '<', "<!DOCTYPE "... is not valid JSON\n` +
+      '    at JSON.parse (<anonymous>)\n' +
+      '    at parseJSONFromBytes (node:internal/deps/undici/undici:5419:19)\n' +
+      '    at successSteps (node:internal/deps/undici/undici:5390:27)\n' +
+      '    at fullyReadBody (node:internal/deps/undici/undici:1501:9)\n' +
+      '    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)\n' +
+      '    at async specConsumeBody (node:internal/deps/undici/undici:5399:7)',
+    name: 'SyntaxError'
+  },
+  url: 'http://localhost:3000/api/auth/session',
+  message: `Unexpected token '<', "<!DOCTYPE "... is not valid JSON`
+}
+[next-auth][error][CLIENT_FETCH_ERROR] 
+https://next-auth.js.org/errors#client_fetch_error Unexpected token '<', "<!DOCTYPE "... is not valid JSON {
+  error: {
+    message: `Unexpected token '<', "<!DOCTYPE "... is not valid JSON`,
+    stack: `SyntaxError: Unexpected token '<', "<!DOCTYPE "... is not valid JSON\n` +
+      '    at JSON.parse (<anonymous>)\n' +
+      '    at parseJSONFromBytes (node:internal/deps/undici/undici:5419:19)\n' +
+      '    at successSteps (node:internal/deps/undici/undici:5390:27)\n' +
+      '    at fullyReadBody (node:internal/deps/undici/undici:1501:9)\n' +
+      '    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)\n' +
+      '    at async specConsumeBody (node:internal/deps/undici/undici:5399:7)',
+    name: 'SyntaxError'
+  },
+  url: 'http://localhost:3000/api/auth/session',
+  message: `Unexpected token '<', "<!DOCTYPE "... is not valid JSON`
+}
