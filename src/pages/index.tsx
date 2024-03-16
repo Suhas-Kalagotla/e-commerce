@@ -1,7 +1,7 @@
 import Head from 'next/head'
 import Image from 'next/image'
 import styles from '@/styles/Home.module.css'
-
+import  CarouselSize  from  "@/components/Carousel/carousel.tsx"
 
 export default function Home(){
     return (
@@ -9,7 +9,7 @@ export default function Home(){
         <Head> 
         </Head>
         <main> 
-            <h1 className="font-thin text-5xl"> hello </h1> 
+            <CarouselSize/>
         </main>
         </>
     ) 
