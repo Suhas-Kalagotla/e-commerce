@@ -1,7 +1,7 @@
 import Head from 'next/head'
 import Image from 'next/image'
 import styles from '@/styles/Home.module.css'
-import  CarouselSize  from  "@/components/Carousel/carousel.tsx"
+import  Slider from  "@/components/Carousel/slider.tsx"
 
 export default function Home(){
     return (
@@ -9,7 +9,7 @@ export default function Home(){
         <Head> 
         </Head>
         <main> 
-            <CarouselSize/>
+            <Slider/>
         </main>
         </>
     ) 

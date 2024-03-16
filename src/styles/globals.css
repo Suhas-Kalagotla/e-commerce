@@ -6,6 +6,7 @@
 
 @layer base {
   :root {
+    --slider:#77B9C1; 
     --navColor: #fbfbfb;
     --background: 0 0% 100%;
     --foreground: 222.2 84% 4.9%;
