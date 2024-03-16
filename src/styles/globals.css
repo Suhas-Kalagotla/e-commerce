@@ -2,8 +2,11 @@
 @tailwind components;
 @tailwind utilities;
 
+@import 'tailwindcss/tailwind.css';
+
 @layer base {
   :root {
+    --navColor: #4169E1;
     --background: 0 0% 100%;
     --foreground: 222.2 84% 4.9%;
     --card: 0 0% 100%;

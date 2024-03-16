@@ -107,8 +107,8 @@ export function UserAuthForm({ className , ...props} : UserAuthFormProps){
                 )}
                 Sign In
               </Button>
-              <p className="px-8 py-3 text-center text-sm text-muted-foreground">
-                Don't have Account? {" "}
+              <p className="px-6 py-3 text-center text-sm text-muted-foreground">
+                Don't have an Account? {" "}
                 <Link
                   href="/signup"
                   className="underline underline-offset-4 hover:text-primary"
