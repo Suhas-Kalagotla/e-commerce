@@ -17,7 +17,7 @@ export default function App({
         {router.pathname !== "/signin" && router.pathname !== "/signup" ? (
             <>
             <Navbar/>
-              <main className=" p-4 md:p-6 bg-gray-300">
+              <main className=" p-0 md:p-0 ">
                   <Component {...pageProps} />
               </main>
             </>

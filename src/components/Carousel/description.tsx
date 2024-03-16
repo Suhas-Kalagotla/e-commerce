@@ -38,14 +38,14 @@ const Description = ({ activeImage, clickNext, clickPrev }: Props) => {
             }}
             className="w-full"
           >
-            <div className="py-16 text-5xl font-extrabold">{elem.title}</div>
-            <div className="leading-relaxed font-medium text-base tracking-wide h-60 md:h-40 italic text-gray-600">
+            <div className="py-16 text-5xl text-white font-extrabold">{elem.title}</div>
+            <div className="leading-relaxed font-medium text-base tracking-wide h-60 md:h-40 italic text-white">
               {" "}
               {elem.desc}
             </div>
           </motion.div>
 
-          <button className="bg-[#ecae7e] text-white uppercase px-4 py-2 rounded-md my-10">
+          <button className="bg-[#ecae7e] text-white uppercase px-4 py-2 rounded-md my-20">
             order now
           </button>
           <div className="absolute md:bottom-1 bottom-10 right-10 md:right-0 w-full flex justify-center items-center">
