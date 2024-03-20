@@ -30,7 +30,7 @@ const Slider = () => {
   }, [activeImage]);
   return (
       <div className="bg-slate-200 w-full p-4" >
-    <main className="grid place-items-center md:grid-cols-3 grid-cols-1 w-full mx-auto max-w-7xl shadow-2xl rounded-2xl">
+    <main className="grid place-items-center md:grid-cols-3 grid-cols-1 w-full mx-auto max-w-3/4 shadow-2xl rounded-2xl">
       <div
         className={`w-full col-span-2 flex justify-center items-center gap-4 transition-transform ease-in-out duration-500 md:rounded-2xl p-6 md:p-0`}
       >
