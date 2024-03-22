@@ -45,7 +45,7 @@ const Slider = () => {
           >
             <Image
               src={image.src}
-              alt=""
+              alt={image.alt}
               width={400}
               height={400}
               className="w-full h-full object-cover md:rounded-tl-3xl md:rounded-bl-3xl"
