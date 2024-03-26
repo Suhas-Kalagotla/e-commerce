@@ -26,11 +26,11 @@ export default function Navbar({}:Props) {
                     </div>
                     <div className="hidden md:block">
                         <div className="ml-4 flex items-center space-x-10">
-                            <a href="/signup" className="text-black text-2xl hover:bg-slate-400 hover:text-white rounded-lg p-2"> home </a>
-                            <a href="/signin" className="text-black text-2xl hover:bg-slate-400 hover:text-white rounded-lg p-2"> 
+                            <a href="/" className="text-black text-2xl hover:bg-slate-400 hover:text-white rounded-lg p-2"> home </a>
+                            <a href="/cart" className="text-black text-2xl hover:bg-slate-400 hover:text-white rounded-lg p-2"> 
                             <ShoppingCart/>
                             </a>
-                            <a href="/" className="text-black text-2xl hover:bg-slate-400 hover:text-white rounded-lg p-2"> 
+                            <a href="/profile" className="text-black text-2xl hover:bg-slate-400 hover:text-white rounded-lg p-2"> 
                             <CircleUser/>
                             </a>
                         </div>
