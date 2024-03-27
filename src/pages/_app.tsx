@@ -12,7 +12,9 @@ export default function App({
   pageProps: { session, ...pageProps },
 }: AppProps) {
   const router = useRouter();
-  const showSidebar = router.pathname ==="/dashboard"; 
+  const showSidebar = router.pathname.startsWith("/dashboard"); 
+  console.log(router.pathname); 
+  console.log(showSidebar); 
   const showNavbar = !showSidebar; 
   return (
       <>

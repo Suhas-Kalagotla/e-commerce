@@ -18,19 +18,19 @@ interface NavItem {
 const userItems: NavItem[] = [
   {
     title: "Dashboard",
-    href: "/",
+    href: "/dashboard",
     icon: LayoutDashboard,
     variant: "default",
   },
   {
     title: "Products",
-    href: "/book-order",
+    href: "/dashboard/products",
     icon: Box,
     variant: "ghost",
   },
   {
     title: "Settings",
-    href: "/settings",
+    href: "/dashboard/settings",
     icon: Settings,
     variant: "ghost",
   },

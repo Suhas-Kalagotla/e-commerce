@@ -17,7 +17,7 @@ interface NavProps {
     title: string;
     label?: string;
     icon: LucideIcon;
-    variant: "default" | "ghost";
+    variant: "gray" | "ghost";
     href: string;
   }[];
 }
@@ -39,7 +39,7 @@ export function Nav({ links, isCollapsed }: NavProps) {
                     href={link.href}
                     className={cn(
                       buttonVariants({
-                        variant: link.href === pathName ? "default" : "ghost",
+                        variant: link.href === pathName ? "gray" : "ghost",
                         size: "icon",
                       }),
                       "h-9 w-9",
@@ -69,7 +69,7 @@ export function Nav({ links, isCollapsed }: NavProps) {
                 href={link.href}
                 className={cn(
                   buttonVariants({
-                    variant: link.href === pathName ? "default" : "ghost",
+                    variant: link.href === pathName ? "gray" : "ghost",
                     size: "sm",
                   }),
                   link.variant === "default" &&
