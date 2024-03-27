@@ -30,7 +30,7 @@ export default function Navbar({}:Props) {
                             <a href="/cart" className="text-black text-2xl hover:bg-slate-400 hover:text-white rounded-lg p-2"> 
                             <ShoppingCart/>
                             </a>
-                            <a href="/profile" className="text-black text-2xl hover:bg-slate-400 hover:text-white rounded-lg p-2"> 
+                            <a href="/dashboard" className="text-black text-2xl hover:bg-slate-400 hover:text-white rounded-lg p-2"> 
                             <CircleUser/>
                             </a>
                         </div>
