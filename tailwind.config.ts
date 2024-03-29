@@ -19,6 +19,7 @@ const config = {
     },
     extend: {
       colors: {
+        bluegray:"var(--bluegray)", 
         slider:"var(--slider)",
         navColor:"var(--navColor)", 
         border: "hsl(var(--border))",

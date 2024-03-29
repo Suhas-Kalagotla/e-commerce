@@ -6,6 +6,7 @@
 
 @layer base {
   :root {
+    --bluegray:#CBD5E1;
     --slider:#77B9C1; 
     --navColor: #fbfbfb;
     --background: 0 0% 100%;
