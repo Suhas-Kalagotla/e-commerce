@@ -19,18 +19,17 @@ export default function Navbar({}:Props) {
                     <div className = "flex items-center">
                         <div className = "flex-shrink-0">
                             <a href="/" className = "text-black">
-                               <Image src="/1.png" alt="Logo" width={200} height={200}
-                                />
+                               <Image src="/1.png" alt="Logo" width={200} height={200}/>
                             </a>
                         </div>
                     </div>
                     <div className="hidden md:block">
                         <div className="ml-4 flex items-center space-x-10">
-                            <a href="/" className="text-black text-2xl hover:bg-slate-400 hover:text-white rounded-lg p-2"> home </a>
-                            <a href="/cart" className="text-black text-2xl hover:bg-slate-400 hover:text-white rounded-lg p-2"> 
+                            <a href="/" className="text-black hover:bg-slate-400 hover:text-white rounded-lg p-2"> home </a>
+                            <a href="/cart" className="text-black hover:bg-slate-400 hover:text-white rounded-lg p-2"> 
                             <ShoppingCart/>
                             </a>
-                            <a href="/dashboard" className="text-black text-2xl hover:bg-slate-400 hover:text-white rounded-lg p-2"> 
+                            <a href="/dashboard" className="text-black hover:bg-slate-400 hover:text-white rounded-lg p-2"> 
                             <CircleUser/>
                             </a>
                         </div>

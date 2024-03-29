@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Nav } from "../ui/nav";
+import Link from "next/link";
 
 type Props = {};
 
@@ -51,10 +52,9 @@ export default function SideNavbar({}: Props) {
         </Button>
       </div>
       <div className="flex items-center  w-full ">
-        <img src="/1.png" alt="logo" className="w-15 h-15" />
-        {!isCollapsed && (
-          <p className="text-md font-bold px-3 leading-7"></p>
-        )}
+        <Link href="/">
+            <img src="/1.png" alt="logo" className="w-15 h-15" />
+        </Link>
       </div>
       <Nav
         isCollapsed={isCollapsed}

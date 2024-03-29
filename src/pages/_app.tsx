@@ -1,5 +1,6 @@
 import Navbar from "@/components/Layout/Navbar";
 import Sidebar from "@/components/Layout/Sidebar" ; 
+import DashboardHeader from "@/components/Layout/DashboardHeader"; 
 
 import "@/styles/globals.css";
 import type { AppProps } from "next/app";
@@ -22,14 +23,24 @@ export default function App({
       <SessionProvider session={session}>
       {router.pathname !== "/signin" && router.pathname !== "/signup" ? (
           <>
-          {showSidebar && <Sidebar />}
+          {showSidebar ? ( <>
+              <Sidebar />
+              <div className="relative flex flex-1 flex-col overflow-y-auto overflow-x-hidden ">
+              <DashboardHeader/>
+                <main className="p-0 md:p-0">
+                <Component {...pageProps} />
+                </main>
+              </div>
+              </>
+                         ):(
           <div className="relative flex flex-1 flex-col overflow-y-auto overflow-x-hidden ">
-
           {showNavbar && <Navbar />}
           <main className="p-0 md:p-0">
           <Component {...pageProps} />
           </main>
           </div>
+                         )
+          }
           </>        
       ):(
       <Component {...pageProps} />
