@@ -9,15 +9,7 @@ import {
   CardTitle,
 } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
-
-
-interface Product {
-    id: string ; 
-    name :string; 
-    description :string;
-    price:number; 
-    imageUrl: string;
-}
+import { Product } from "@/types/globa.d"
 
 export default function ProductCard({product}:Product){
     return(

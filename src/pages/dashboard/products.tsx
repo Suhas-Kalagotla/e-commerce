@@ -8,13 +8,37 @@ import {
   TooltipTrigger,
 } from "@/components/ui/tooltip";
 import { TooltipProvider } from "@radix-ui/react-tooltip";
-import ProductCard from "@/components/productCard.tsx"; 
+import ProductCard from "@/components/Product/productCard.tsx"; 
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
+import { Label } from "@/components/ui/label";
+import { Input } from "@/components/ui/input";
+import { Product } from "@/types/globa";
 
 export default function Products(){
     const [selectFilter, setSelectFilter] = useState('all'); 
-    
+    const [open, setOpen] = useState(false);
+    const [product, setProduct] = useState<Product>({
+        id: "",
+        name: "",
+        description:"",
+        price: "",
+        imageUrl:"",
+    });
+
     const handleFilter = (filter: string)=>{
         setSelectFilter(filter); 
+    }
+
+    const handleSubmit = ()=>{
+        console.log("submit handler"); 
     }
 
     const productItems:Product[] =[
@@ -43,6 +67,20 @@ export default function Products(){
                  <Button onClick={() =>handleFilter('womens')} className={cn(buttonVariants({variant:selectFilter === 'womens'? "active" : "filter"}))}>Womens</Button>
             </div>
             <div className="pr-4">
+            <Dialog
+                open={open}
+                onOpenChange={(open) => {
+                    setOpen(open);
+                    setProduct({
+                        id: "",
+                        name: "",
+                        description:"",
+                        price: "",
+                        imageUrl:"",
+                    });
+                }}
+            >
+            <DialogTrigger >
                  <TooltipProvider>
                  <Tooltip delayDuration={0}>
                  <TooltipTrigger asChild>
@@ -55,6 +93,40 @@ export default function Products(){
                  </TooltipContent>
                  </Tooltip>
                  </TooltipProvider>
+            </DialogTrigger>
+            <DialogContent className="sm:max-w-[425px]">
+            <DialogHeader>
+                <DialogTitle>Add Product</DialogTitle>
+            </DialogHeader>
+            <div className="border border-border "></div>
+            <form onSubmit={handleSubmit}>
+            <div className="grid gap-6 py-4">
+            <div className="grid gap-2">
+            <Label htmlFor="name1">Product Name</Label>
+            <Input
+            id="name1"
+            placeholder="Enter Product Name"
+            required
+            value={product.name}
+            onChange={(e) =>
+                setProduct({
+                    ...product,
+                    name: e.target.value,
+                })
+            }
+            />
+            </div>
+            <div className="grid gap-2">
+            <Label htmlFor="name">Select Status</Label>
+            {/* <FormControl> */}
+            </div>
+            </div>
+            <DialogFooter>
+            </DialogFooter>
+            <Button type="submit">Submit</Button>
+            </form>
+            </DialogContent>
+            </Dialog>
             </div>
         </div>
         <div className="grid md:grid-cols-3 gap-4 grid-cols-1">
