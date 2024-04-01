@@ -1,7 +1,7 @@
 import Navbar from "@/components/Layout/Navbar";
 import Sidebar from "@/components/Layout/Sidebar" ; 
 import DashboardHeader from "@/components/Layout/DashboardHeader"; 
-
+import RouterGuard from "@/components/RouterGuard"; 
 import "@/styles/globals.css";
 import type { AppProps } from "next/app";
 import { SessionProvider } from "next-auth/react";

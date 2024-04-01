@@ -2,6 +2,7 @@ import Head from 'next/head'
 import Image from 'next/image'
 import styles from '@/styles/Home.module.css'
 import  {Slider,Footer,Shopping} from  "@/components"
+import { getSession, useSession } from "next-auth/react";
 
 export default function Home(){
     return (
@@ -17,4 +18,18 @@ export default function Home(){
     ) 
 }
 
+export const getServerSideProps: GetServerSideProps = async (req) => {
+  const session = await getSession(req);
+  if (!session) {
+    return {
+      redirect: {
+        destination: "/signin",
+        permanent: false,
+      },
+    };
+  }
+  return {
+    props: {},
+  };
+};
 

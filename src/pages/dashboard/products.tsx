@@ -20,7 +20,10 @@ import {
 } from "@/components/ui/dialog";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea"
 import { Product } from "@/types/globa";
+import { api } from "@/Api";
+
 
 export default function Products(){
     const [selectFilter, setSelectFilter] = useState('all'); 
@@ -30,15 +33,21 @@ export default function Products(){
         name: "",
         description:"",
         price: "",
-        imageUrl:"",
+        image:"",
     });
 
     const handleFilter = (filter: string)=>{
         setSelectFilter(filter); 
     }
 
-    const handleSubmit = ()=>{
-        console.log("submit handler"); 
+    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+        try{
+            console.log("hell0"); 
+            e.preventDefault(); 
+            const res = await api.post("/product/create", product);
+        }catch(error){
+            console.log(error); 
+        }
     }
 
     const productItems:Product[] =[
@@ -47,14 +56,14 @@ export default function Products(){
            "name": "Product A",
            "description": "This is product A",
            "price": 19.99,
-           "imageUrl": "/shirt.jpeg",
+           "image": "/shirt.jpeg",
          },
          {
            "id": "2",
            "name": "Product B",
            "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
            "price": 29.99,
-           "imageUrl": "https://example.com/product-b.jpg"
+           "image": "https://example.com/product-b.jpg"
          }
         ];
 
@@ -99,31 +108,73 @@ export default function Products(){
                 <DialogTitle>Add Product</DialogTitle>
             </DialogHeader>
             <div className="border border-border "></div>
-            <form onSubmit={handleSubmit}>
-            <div className="grid gap-6 py-4">
-            <div className="grid gap-2">
-            <Label htmlFor="name1">Product Name</Label>
-            <Input
-            id="name1"
-            placeholder="Enter Product Name"
-            required
-            value={product.name}
-            onChange={(e) =>
-                setProduct({
-                    ...product,
-                    name: e.target.value,
-                })
-            }
-            />
-            </div>
-            <div className="grid gap-2">
-            <Label htmlFor="name">Select Status</Label>
-            {/* <FormControl> */}
-            </div>
-            </div>
+                <form onSubmit={handleSubmit}>
+                <div className="grid gap-6 py-4">
+                <div className="grid gap-2">
+                <Label htmlFor="name">Product Name</Label>
+                <Input
+                id="name"
+                placeholder="Enter Product Name"
+                required
+                value={product.name}
+                onChange={(e) =>
+                    setProduct({
+                        ...product,
+                        name: e.target.value,
+                    })
+                }
+                />
+                </div>
+                <div className="grid gap-2">
+                <Label htmlFor="description">Product Description</Label>
+                <Textarea 
+                id="description"
+                placeholder="Enter Product Description"
+                required
+                value={product.description}
+                onChange={(e) =>
+                    setProduct({
+                        ...product,
+                        description: e.target.value,
+                    })
+                }
+                />
+                </div>
+                <div className="grid gap-2">
+                <Label htmlFor="price">Price</Label>
+                <Input
+                id="price"
+                placeholder="Enter Product price"
+                required
+                value={product.price}
+                onChange={(e) =>
+                    setProduct({
+                        ...product,
+                        price: e.target.value,
+                    })
+                }
+                />
+                </div>
+                <div className="grid gap-2">
+                <Label htmlFor="photo">Product Image</Label>
+                <Input
+                type="file"
+                id="image"
+                accept=""
+                required
+                onChange={(e)=>
+                    setProduct({
+                        ...product,
+                        image:e.target.files[0],
+                    })
+                }
+                />
+                </div>
+                </div>
             <DialogFooter>
             </DialogFooter>
-            <Button type="submit">Submit</Button>
+                <Button type="submit" onClick={handleSubmit}>Create</Button>
+
             </form>
             </DialogContent>
             </Dialog>
