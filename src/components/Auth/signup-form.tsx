@@ -32,7 +32,7 @@ export function SignUpForm({ className, ...props }: UserAuthFormProps) {
     event.preventDefault();
     setIsLoading(true);
     try {
-        console.log("fetching"); 
+      console.log("fetching"); 
       const res = await api.post("/auth/register", user);
       router.push("/signin");
     } catch (error) {
