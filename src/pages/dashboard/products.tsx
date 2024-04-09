@@ -52,10 +52,12 @@ export default function Products() {
       form.append("name", product.name);
       form.append("description", product.description);
       form.append("price", product.price.toString());
-      console.log(product.image);
       form.append("image", product.image);
-      console.log(form);
-      const res = await api.post("upload_files", form);
+      const res = await api.post("/product/create", form);
+      if (res.status == 201) {
+        setOpen(false);
+        alert("success");
+      }
     } catch (error) {
       console.log(error);
     }
