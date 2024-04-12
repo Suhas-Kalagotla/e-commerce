@@ -1,7 +1,7 @@
 import { getSession, useSession } from "next-auth/react";
 import { GetServerSideProps } from "next";
 import { Plus } from "lucide-react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Button, buttonVariants } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import {
@@ -32,6 +32,8 @@ import { accessSync } from "fs";
 export default function Products() {
   const [selectFilter, setSelectFilter] = useState("all");
   const [open, setOpen] = useState(false);
+  const [pro, setPros] = useState<Product[]>([]);
+
   const [product, setProduct] = useState<Product>({
     id: "",
     name: "",
@@ -56,22 +58,21 @@ export default function Products() {
       const res = await api.post("/product/create", form);
       if (res.status == 201) {
         setOpen(false);
-        alert("success");
       }
     } catch (error) {
       console.log(error);
     }
   };
 
-  const productItems: Product[] = [
-    {
-      id: "1",
-      name: "Product A",
-      description: "This is product A",
-      price: 19.99,
-      imageUrl: "/shirt.jpeg",
-    },
-  ];
+  const fetchProducts = async () => {
+    const res = await api.get("/product/get");
+    console.log(res.data.products);
+    setPros(res.data.products);
+  };
+
+  useEffect(() => {
+    fetchProducts();
+  }, [pro]);
 
   return (
     <div className="w-full  h-screen mt-4 p-2">
@@ -225,7 +226,7 @@ export default function Products() {
         </div>
       </div>
       <div className="grid md:grid-cols-3 gap-4 grid-cols-1">
-        {productItems.map((product, idx) => (
+        {pro.map((product, idx) => (
           <ProductCard key={idx} product={product} />
         ))}
       </div>

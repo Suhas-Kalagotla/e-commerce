@@ -18,7 +18,7 @@ export default function ProductCard({ product }: { product: Product }) {
       <Card className="w-full bg-white">
         <CardHeader className="w-full flex">
           <Image
-            src={product.imageUrl}
+            src={`${process.env.NEXT_PUBLIC_BACKEND_URL}/public/${product.imageUrl}`}
             alt="product image"
             className="h-64 w-auto object-cover"
             width={250}
@@ -26,7 +26,7 @@ export default function ProductCard({ product }: { product: Product }) {
           />
         </CardHeader>
         <CardContent className="flex h-24 flex-col items-center justify-center ">
-          <p>shirt</p>
+          <p>{product.name}</p>
           <p className="text-xs">{product.description}</p>
         </CardContent>
         <CardFooter className="grid grid-cols-2 gap-2">
