@@ -5,4 +5,10 @@ export interface Product {
   price: number;
   imageUrl: string;
   image?: any;
+  category: string;
+}
+
+export enum Category{
+    male ="male",
+    female = "female",
 }

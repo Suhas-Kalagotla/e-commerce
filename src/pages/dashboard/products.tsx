@@ -1,9 +1,17 @@
 import { getSession, useSession } from "next-auth/react";
 import { GetServerSideProps } from "next";
+import { useToast } from "@/components/ui/use-toast";
 import { Plus } from "lucide-react";
 import { useState, useEffect } from "react";
 import { Button, buttonVariants } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 import {
   Tooltip,
   TooltipContent,
@@ -23,17 +31,14 @@ import {
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-import { Product } from "@/types/globa";
+import { Product, Category } from "@/types/globa";
 import { api } from "@/Api";
-import { constants } from "buffer";
-import { constrainedMemory } from "process";
-import { accessSync } from "fs";
 
 export default function Products() {
   const [selectFilter, setSelectFilter] = useState("all");
   const [open, setOpen] = useState(false);
   const [pro, setPros] = useState<Product[]>([]);
-
+  const { toast } = useToast();
   const [product, setProduct] = useState<Product>({
     id: "",
     name: "",
@@ -41,10 +46,12 @@ export default function Products() {
     price: 0,
     imageUrl: "",
     image: "",
+    category: "male" as Category,
   });
 
   const handleFilter = (filter: string) => {
     setSelectFilter(filter);
+    fetchProducts();
   };
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -58,6 +65,9 @@ export default function Products() {
       const res = await api.post("/product/create", form);
       if (res.status == 201) {
         setOpen(false);
+        toast({
+          description: "Product Created Successfully",
+        });
       }
     } catch (error) {
       console.log(error);
@@ -65,14 +75,17 @@ export default function Products() {
   };
 
   const fetchProducts = async () => {
-    const res = await api.get("/product/get");
-    console.log(res.data.products);
+    const res = await api.get("/product/get", {
+      params: {
+        category: selectFilter,
+      },
+    });
     setPros(res.data.products);
   };
 
   useEffect(() => {
     fetchProducts();
-  }, [pro]);
+  }, [selectFilter]);
 
   return (
     <div className="w-full  h-screen mt-4 p-2">
@@ -120,6 +133,7 @@ export default function Products() {
                 description: "",
                 price: 0,
                 imageUrl: "",
+                category: "male" as Category,
               });
             }}
           >
@@ -192,6 +206,28 @@ export default function Products() {
                       }
                     />
                   </div>
+                  <div className="grid gap-2">
+                    <Label htmlFor="name">Select Category</Label>
+                    <Select
+                      required
+                      value={product.category}
+                      onValueChange={(value) =>
+                        setProduct({
+                          ...product,
+                          category: value as Category,
+                        })
+                      }
+                    >
+                      <SelectTrigger>
+                        <SelectValue placeholder="Select a Category" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectItem value="active">Mens</SelectItem>
+                        <SelectItem value="inactive">Womens</SelectItem>
+                      </SelectContent>
+                    </Select>
+                  </div>
+
                   <div className="grid gap-2">
                     <Label htmlFor="photo">Product Image</Label>
                     <Input

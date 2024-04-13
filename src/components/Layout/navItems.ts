@@ -34,12 +34,6 @@ const userItems: NavItem[] = [
     icon: Settings,
     variant: "ghost",
   },
-  {
-    title: "Record",
-    href: "/records",
-    icon: FileDown,
-    variant: "ghost",
-  },
 ];
 
 const adminItems: NavItem[] = [
@@ -63,8 +57,6 @@ const adminItems: NavItem[] = [
   },
 ];
 
-
-
 export const getNavItems = (role: string) => {
   switch (role) {
     case "USER":
@@ -75,4 +67,3 @@ export const getNavItems = (role: string) => {
       return [];
   }
 };
-

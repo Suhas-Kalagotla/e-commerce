@@ -21,8 +21,8 @@ export default function ProductCard({ product }: { product: Product }) {
             src={`${process.env.NEXT_PUBLIC_BACKEND_URL}/public/${product.imageUrl}`}
             alt="product image"
             className="h-64 w-auto object-cover"
-            width={250}
-            height={250}
+            width={200}
+            height={200}
           />
         </CardHeader>
         <CardContent className="flex h-24 flex-col items-center justify-center ">

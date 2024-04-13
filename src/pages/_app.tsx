@@ -14,8 +14,6 @@ export default function App({
 }: AppProps) {
   const router = useRouter();
   const showSidebar = router.pathname.startsWith("/dashboard"); 
-  console.log(router.pathname); 
-  console.log(showSidebar); 
   const showNavbar = !showSidebar; 
   return (
       <>
