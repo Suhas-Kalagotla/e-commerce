@@ -31,8 +31,13 @@ import {
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-import { Product, Category } from "@/types/globa";
+import { Product } from "@/types/globa";
 import { api } from "@/Api";
+
+export enum Category {
+  mens = "mens",
+  womens = "womens",
+}
 
 export default function Products() {
   const [selectFilter, setSelectFilter] = useState("all");
@@ -46,7 +51,7 @@ export default function Products() {
     price: 0,
     imageUrl: "",
     image: "",
-    category: "male" as Category,
+    category: Category.mens,
   });
 
   const handleFilter = (filter: string) => {
@@ -62,6 +67,7 @@ export default function Products() {
       form.append("description", product.description);
       form.append("price", product.price.toString());
       form.append("image", product.image);
+      form.append("category", product.category);
       const res = await api.post("/product/create", form);
       if (res.status == 201) {
         setOpen(false);
@@ -133,7 +139,7 @@ export default function Products() {
                 description: "",
                 price: 0,
                 imageUrl: "",
-                category: "male" as Category,
+                category: Category.mens,
               });
             }}
           >
@@ -222,8 +228,8 @@ export default function Products() {
                         <SelectValue placeholder="Select a Category" />
                       </SelectTrigger>
                       <SelectContent>
-                        <SelectItem value="active">Mens</SelectItem>
-                        <SelectItem value="inactive">Womens</SelectItem>
+                        <SelectItem value={Category.mens}>Mens</SelectItem>
+                        <SelectItem value={Category.womens}>Womens</SelectItem>
                       </SelectContent>
                     </Select>
                   </div>

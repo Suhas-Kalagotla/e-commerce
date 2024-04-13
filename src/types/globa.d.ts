@@ -8,7 +8,7 @@ export interface Product {
   category: string;
 }
 
-export enum Category{
-    male ="male",
-    female = "female",
+export enum Category {
+  mens = "mens",
+    womens= "womens",
 }
