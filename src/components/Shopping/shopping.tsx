@@ -1,14 +1,35 @@
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Mens, Womens } from "@/components";
-import { useState } from "react";
+import { api } from "@/Api";
+import { useState, useEffect } from "react";
+import { Product } from "@/types/globa";
 
 export default function Shopping() {
   const [isActive, setIsActive] = useState("mens");
+  const [mensProducts, setMensProducts] = useState<Product[]>([]);
+  const [womensProducts, setWomensProducts] = useState<Product[]>([]);
+
+  const fetchProducts = async () => {
+    const res = await api.get("/product/get");
+    const allProducts: Product[] = res.data.products;
+    const mensFilter = allProducts.filter(
+      (product) => product.category === "mens",
+    );
+    const womensFilter = allProducts.filter(
+      (product) => product.category === "womens",
+    );
+    setMensProducts(mensFilter);
+    setWomensProducts(womensFilter);
+  };
+
+  useEffect(() => {
+    fetchProducts();
+  }, []);
 
   return (
     <main className={"flex flex-col items-center p-10 w-full"}>
       <Tabs defaultValue="mens" className="w-full">
-        <TabsList className="w-4/5 flex p-0 m-0 w-full">
+        <TabsList className="w-full flex p-0 m-0 ">
           <TabsTrigger
             value="mens"
             onClick={() => setIsActive("mens")}
@@ -31,10 +52,10 @@ export default function Shopping() {
           </TabsTrigger>
         </TabsList>
         <TabsContent value="mens">
-          <Mens />
+          <Mens pro={mensProducts} />
         </TabsContent>
         <TabsContent value="womens">
-          <Womens />
+          <Womens pro={womensProducts} />
         </TabsContent>
       </Tabs>
     </main>

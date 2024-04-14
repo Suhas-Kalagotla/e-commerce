@@ -18,7 +18,7 @@ export default function Home(){
     ) 
 }
 
-export const getServerSideProps: GetServerSideProps = async (req) => {
+export const getServerSideProps: GetServerSideProps = async (req:any) => {
   const session = await getSession(req);
   if (!session) {
     return {

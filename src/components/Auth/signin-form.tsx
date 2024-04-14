@@ -1,6 +1,6 @@
-import { useState } from "react"; 
+import { useState } from "react";
 
-import { cn } from "@/lib/utils"; 
+import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -20,40 +20,39 @@ import { ToastAction } from "../ui/toast";
 
 interface UserAuthFormProps extends React.HTMLAttributes<HTMLDivElement> {}
 
-export function UserAuthForm({ className , ...props} : UserAuthFormProps){
-    const [isLoading, setIsLoading] = useState<boolean>(false); 
-    const [error, setError] = useState(false); 
-    const [message, setMessage] = useState<string>(""); 
-    const [user, setUser] = useState({
-        username:"", 
-        password:"", 
-    }); 
-    const router = useRouter(); 
-    const { toast } = useToast(); 
+export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [error, setError] = useState(false);
+  const [message, setMessage] = useState<string>("");
+  const [user, setUser] = useState({
+    username: "",
+    password: "",
+  });
+  const router = useRouter();
+  const { toast } = useToast();
 
-    async function onSubmit(event: React.SyntheticEvent) {
-         event.preventDefault();
-         setIsLoading(true);
+  async function onSubmit(event: React.SyntheticEvent) {
+    event.preventDefault();
+    setIsLoading(true);
 
-         const res = await signIn("credentials", {
-           username: user.username,
-           password: user.password,
-           redirect: false,
-         });
-         if (res?.error) {
-           setError(true);
-           setMessage(res.error);
-           toast({
-             variant: "destructive",
-             title: "Uh oh! Something went wrong.",
-             description: "Please Provide Validation.",
-             action: <ToastAction altText="Try again">Try again</ToastAction>,
-           });
-         } else {
-           console.log(res);
-           router.push("/");
-         }
-         setIsLoading(false);
+    const res = await signIn("credentials", {
+      username: user.username,
+      password: user.password,
+      redirect: false,
+    });
+    if (res?.error) {
+      setError(true);
+      setMessage(res.error);
+      toast({
+        variant: "destructive",
+        title: "Uh oh! Something went wrong.",
+        description: "Please Provide Validation.",
+        action: <ToastAction altText="Try again">Try again</ToastAction>,
+      });
+    } else {
+      router.push("/signin");
+    }
+    setIsLoading(false);
   }
 
   return (
@@ -108,7 +107,7 @@ export function UserAuthForm({ className , ...props} : UserAuthFormProps){
                 Sign In
               </Button>
               <p className="px-6 py-3 text-center text-sm text-muted-foreground">
-                Don't have an Account? {" "}
+                Don't have an Account?{" "}
                 <Link
                   href="/signup"
                   className="underline underline-offset-4 hover:text-primary"
@@ -116,7 +115,6 @@ export function UserAuthForm({ className , ...props} : UserAuthFormProps){
                   SignUp
                 </Link>{" "}
               </p>
-
             </div>
           </CardFooter>
         </Card>
@@ -124,4 +122,3 @@ export function UserAuthForm({ className , ...props} : UserAuthFormProps){
     </div>
   );
 }
-

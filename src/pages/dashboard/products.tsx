@@ -72,7 +72,8 @@ export default function Products() {
       if (res.status == 201) {
         setOpen(false);
         toast({
-          description: "Product Created Successfully",
+          variant: "success",
+          description: "Successfully created Product.",
         });
       }
     } catch (error) {

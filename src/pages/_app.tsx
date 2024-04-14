@@ -43,6 +43,7 @@ export default function App({
       ):(
       <Component {...pageProps} />
       )}
+      <Toaster />
       </SessionProvider>
       </div>
       </>

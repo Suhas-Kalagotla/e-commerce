@@ -1,5 +1,6 @@
 import * as React from "react";
-
+import { useToast } from "../ui/use-toast";
+import { ToastAction } from "../ui/toast";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -14,12 +15,13 @@ import {
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { api } from "@/Api";
-import { Ellipsis } from 'lucide-react';
+import { Ellipsis } from "lucide-react";
 
 interface UserAuthFormProps extends React.HTMLAttributes<HTMLDivElement> {}
 
 export function SignUpForm({ className, ...props }: UserAuthFormProps) {
   const [isLoading, setIsLoading] = React.useState<boolean>(false);
+  const { toast } = useToast();
   const [user, setUser] = React.useState({
     username: "",
     email: "",
@@ -32,11 +34,14 @@ export function SignUpForm({ className, ...props }: UserAuthFormProps) {
     event.preventDefault();
     setIsLoading(true);
     try {
-      console.log("fetching"); 
       const res = await api.post("/auth/register", user);
       router.push("/signin");
     } catch (error) {
-      console.error(error);
+      toast({
+        variant: "destructive",
+        title: "Uh oh! Something went wrong.",
+        description: "Please Try again.",
+      });
     }
     setIsLoading(false);
   }
@@ -116,4 +121,3 @@ export function SignUpForm({ className, ...props }: UserAuthFormProps) {
     </div>
   );
 }
-
