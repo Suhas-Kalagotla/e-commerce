@@ -1,3 +1,4 @@
+"use client";
 import { useState } from "react";
 
 import { cn } from "@/lib/utils";
@@ -12,7 +13,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { signIn } from "next-auth/react";
+import { signIn, useSession } from "next-auth/react";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { useToast } from "../ui/use-toast";
@@ -24,6 +25,8 @@ export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [error, setError] = useState(false);
   const [message, setMessage] = useState<string>("");
+  const { data: session } = useSession();
+
   const [user, setUser] = useState({
     username: "",
     password: "",
@@ -40,6 +43,7 @@ export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
       password: user.password,
       redirect: false,
     });
+
     if (res?.error) {
       setError(true);
       setMessage(res.error);

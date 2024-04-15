@@ -1,5 +1,5 @@
 import React from "react";
-import { EllipsisVertical } from "lucide-react";
+import { ToastAction } from "../ui/toast";
 import {
   Card,
   CardContent,
@@ -7,8 +7,11 @@ import {
   CardHeader,
 } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Product } from "@/types/globa.d";
+import { CartItem, Product } from "@/types/globa.d";
 import Image from "next/image";
+import { useToast } from "@/components/ui/use-toast";
+import { api } from "@/Api";
+import { Link } from "lucide-react";
 import { DropdownMenuCheckboxItemProps } from "@radix-ui/react-dropdown-menu";
 
 import {
@@ -19,8 +22,67 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import { useRouter } from "next/router";
+import { User } from "@/types/globa.d";
 
-export default function ProductCard({ product }: { product: Product }) {
+export default function ProductCard({
+  product,
+  user,
+  cartItemId,
+  fetchProducts,
+}: {
+  product: Product;
+  user: User;
+  cartItemId?: string;
+  fetchProducts?: () => void;
+}) {
+  const router = useRouter();
+  const { toast } = useToast();
+
+  const navToCart = () => {
+    router.push("/cart");
+  };
+
+  const removeCart = async () => {
+    try {
+      const res = await api.post("/cart/delete", { cartItemId });
+      if (res.status == 200) fetchProducts?.();
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const addCart = async () => {
+    try {
+      const res = await api.post("/cart/add", {
+        product: product,
+        user: user,
+      });
+      if (res.status == 200) {
+        toast({
+          variant: "success",
+          description: res.data.message,
+          action: (
+            <ToastAction
+              altText="View Cart"
+              onClick={navToCart}
+              className="hover:text-black"
+            >
+              View Cart
+            </ToastAction>
+          ),
+        });
+      } else {
+        toast({
+          variant: "destructive",
+          description: res.data.message,
+        });
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <div className="flex bg-white m-2 rounded-xl h-auto shadow-2lg">
       <Card className="w-full bg-white">
@@ -58,7 +120,15 @@ export default function ProductCard({ product }: { product: Product }) {
         </CardContent>
         <CardFooter className="grid grid-cols-2 gap-2">
           <p>$: {product.price}</p>
-          <Button variant="secondary">Add to Cart</Button>
+          {router.pathname !== "/cart" ? (
+            <Button variant="secondary" onClick={addCart}>
+              Add to Cart
+            </Button>
+          ) : (
+            <Button variant="destructive" onClick={removeCart}>
+              Remove
+            </Button>
+          )}
         </CardFooter>
       </Card>
     </div>

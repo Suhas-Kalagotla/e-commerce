@@ -1,4 +1,5 @@
 import * as React from "react";
+import { getSession, useSession } from "next-auth/react";
 import { useToast } from "../ui/use-toast";
 import { ToastAction } from "../ui/toast";
 import { cn } from "@/lib/utils";
@@ -22,6 +23,7 @@ interface UserAuthFormProps extends React.HTMLAttributes<HTMLDivElement> {}
 export function SignUpForm({ className, ...props }: UserAuthFormProps) {
   const [isLoading, setIsLoading] = React.useState<boolean>(false);
   const { toast } = useToast();
+  const session = getSession();
   const [user, setUser] = React.useState({
     username: "",
     email: "",

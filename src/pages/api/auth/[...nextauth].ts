@@ -7,11 +7,14 @@ export const authOptions: NextAuthOptions = {
   },
   callbacks: {
     session({ session, token }) {
-      if (token.id && session.user) {
-        session.user.id = token.id as string;
-        session.user.role = token.role as string;
-        session.user.username = token.username as string;
-      }
+      session.user = {
+        id: token.id as string,
+        email: token.email as string,
+        username: token.username as string,
+        role: token.role as string,
+        cartId: token.cartId as string,
+      };
+
       return session;
     },
     jwt({ token, user }) {
@@ -19,6 +22,7 @@ export const authOptions: NextAuthOptions = {
         token.id = user.id;
         token.role = user.role;
         token.username = user.username;
+        token.cartId = user.cartId;
       }
       return token;
     },
@@ -41,11 +45,10 @@ export const authOptions: NextAuthOptions = {
               method: "POST",
               body: JSON.stringify(credentials),
               headers: { "Content-Type": "application/json" },
-            }
+            },
           );
 
           const data = await res.json();
-
           if (data.user) {
             return data.user;
           } else {

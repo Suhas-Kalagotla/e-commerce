@@ -1,11 +1,22 @@
 "use client";
 import React, { useState } from "react";
+import { signOut } from "next-auth/react";
 import Image from "next/image";
 import { Menu, CircleX, ShoppingCart, CircleUser } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
+import { LogOut } from "lucide-react";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuGroup,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 
-export default function Navbar({}: Props) {
+export default function Navbar() {
   const [isClick, setisClick] = useState(false);
 
   const toggleNavbar = () => {
@@ -30,8 +41,7 @@ export default function Navbar({}: Props) {
                   href="/"
                   className="text-black hover:bg-slate-400 hover:text-white rounded-lg p-2"
                 >
-                  {" "}
-                  home{" "}
+                  Home
                 </Link>
                 <Link
                   href="/cart"
@@ -39,12 +49,9 @@ export default function Navbar({}: Props) {
                 >
                   <ShoppingCart />
                 </Link>
-                <Link
-                  href="/dashboard"
-                  className="text-black hover:bg-slate-400 hover:text-white rounded-lg p-2"
-                >
-                  <CircleUser />
-                </Link>
+                <div className="text-black hover:bg-slate-400 hover:text-white rounded-lg p-2">
+                  <UserProfile />
+                </div>
               </div>
             </div>
             <div className="md:hidden flex items-center">
@@ -71,8 +78,7 @@ export default function Navbar({}: Props) {
                   href="/"
                   className="block text-black hover:bg-slate-400 hover:text-white rounded-lg p-2"
                 >
-                  {" "}
-                  home{" "}
+                  Home
                 </Link>
                 <Link
                   href="/cart"
@@ -80,17 +86,47 @@ export default function Navbar({}: Props) {
                 >
                   <ShoppingCart />
                 </Link>
-                <Link
-                  href="/"
-                  className="block text-black hover:bg-slate-400 hover:text-white rounded-lg p-2"
-                >
-                  <CircleUser />
-                </Link>
+                <UserProfile />
               </div>
             </div>
           )}
         </div>
       </nav>
     </>
+  );
+}
+
+function UserProfile() {
+  return (
+    <DropdownMenu>
+      <DropdownMenuTrigger asChild>
+        <CircleUser className="cursor-pointer" />
+      </DropdownMenuTrigger>
+      <DropdownMenuContent className="w-56">
+        <DropdownMenuLabel>My Account</DropdownMenuLabel>
+        <DropdownMenuSeparator />
+        <DropdownMenuGroup>
+          <DropdownMenuItem>
+            <Link href="/settings">
+              <span>Profile</span>
+            </Link>
+          </DropdownMenuItem>
+          <DropdownMenuItem>
+
+          <Link href="/dashboard">
+          Dashboard
+          </Link>
+          </DropdownMenuItem>
+        </DropdownMenuGroup>
+        <DropdownMenuSeparator />
+        <DropdownMenuItem
+          onClick={() => signOut({ redirect: true, callbackUrl: "/signin" })}
+          className="cursor-pointer"
+        >
+          <LogOut className="mr-2 h-4 w-4" />
+          <span className="cursor-pointer">Log out</span>
+        </DropdownMenuItem>
+      </DropdownMenuContent>
+    </DropdownMenu>
   );
 }

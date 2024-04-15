@@ -22,7 +22,6 @@ import ProductCard from "@/components/Product/productCard";
 import {
   Dialog,
   DialogContent,
-  DialogDescription,
   DialogFooter,
   DialogHeader,
   DialogTitle,
@@ -31,7 +30,7 @@ import {
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-import { Product } from "@/types/globa";
+import { Product, User } from "@/types/globa";
 import { api } from "@/Api";
 
 export enum Category {
@@ -39,7 +38,7 @@ export enum Category {
   womens = "womens",
 }
 
-export default function Products() {
+export default function Products({ user }: { user: User }) {
   const [selectFilter, setSelectFilter] = useState("all");
   const [open, setOpen] = useState(false);
   const [pro, setPros] = useState<Product[]>([]);
@@ -270,7 +269,7 @@ export default function Products() {
       </div>
       <div className="grid md:grid-cols-3 gap-4 grid-cols-1">
         {pro.map((product, idx) => (
-          <ProductCard key={idx} product={product} />
+          <ProductCard key={idx} product={product} user={user} />
         ))}
       </div>
     </div>
@@ -288,6 +287,8 @@ export const getServerSideProps: GetServerSideProps = async (req) => {
     };
   }
   return {
-    props: {},
+    props: {
+        user:session.user, 
+    },
   };
 };

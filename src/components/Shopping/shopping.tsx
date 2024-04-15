@@ -2,9 +2,9 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Mens, Womens } from "@/components";
 import { api } from "@/Api";
 import { useState, useEffect } from "react";
-import { Product } from "@/types/globa";
+import { Product,User } from "@/types/globa";
 
-export default function Shopping() {
+export default function Shopping({ user }: { user: User }) {
   const [isActive, setIsActive] = useState("mens");
   const [mensProducts, setMensProducts] = useState<Product[]>([]);
   const [womensProducts, setWomensProducts] = useState<Product[]>([]);
@@ -52,10 +52,10 @@ export default function Shopping() {
           </TabsTrigger>
         </TabsList>
         <TabsContent value="mens">
-          <Mens pro={mensProducts} />
+          <Mens pro={mensProducts} user={user} />
         </TabsContent>
         <TabsContent value="womens">
-          <Womens pro={womensProducts} />
+          <Womens pro={womensProducts} user={user} />
         </TabsContent>
       </Tabs>
     </main>

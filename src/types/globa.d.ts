@@ -16,19 +16,21 @@ export interface Cart {
 }
 
 export interface CartItem {
-  id:string;
-  cartId:string;
-  cart:Cart;
-  productId:string;
-  product:Product;
-  quantity:number;
+  id: string;
+  cartId: string;
+  cart: Cart;
+  productId: string;
+  product: Product;
+  quantity: number;
 }
+
 export interface User {
   id: string;
   username: string;
   email: string;
   password: string;
   orders: Order[];
+  cartId: CartId?;
   cart: Cart?;
   role: Role;
 }
