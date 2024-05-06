@@ -1,4 +1,4 @@
-import { getSession, useSession } from "next-auth/react";
+import { getSession } from "next-auth/react";
 import { GetServerSideProps } from "next";
 import { useToast } from "@/components/ui/use-toast";
 import { Plus } from "lucide-react";
@@ -286,9 +286,17 @@ export const getServerSideProps: GetServerSideProps = async (req) => {
       },
     };
   }
+  //  if (session.user?.role === "USER") {
+  //    return {
+  //      redirect: {
+  //        destination: "/",
+  //        permanent: false,
+  //      },
+  //    };
+  //  }
   return {
     props: {
-        user:session.user, 
+      user: session.user,
     },
   };
 };

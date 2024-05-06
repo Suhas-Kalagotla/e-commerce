@@ -1,4 +1,6 @@
 "use client";
+import { GetServerSideProps } from "next";
+import { getSession } from "next-auth/react";
 import React, { useState } from "react";
 import { signOut } from "next-auth/react";
 import Image from "next/image";
@@ -15,8 +17,9 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import { User } from "@/types/globa";
 
-export default function Navbar() {
+export default function Navbar({ user }: { user: User}) {
   const [isClick, setisClick] = useState(false);
 
   const toggleNavbar = () => {
@@ -50,7 +53,7 @@ export default function Navbar() {
                   <ShoppingCart />
                 </Link>
                 <div className="text-black hover:bg-slate-400 hover:text-white rounded-lg p-2">
-                  <UserProfile />
+                  <UserProfile user={user} />
                 </div>
               </div>
             </div>
@@ -86,7 +89,7 @@ export default function Navbar() {
                 >
                   <ShoppingCart />
                 </Link>
-                <UserProfile />
+                <UserProfile user={user} />
               </div>
             </div>
           )}
@@ -96,7 +99,8 @@ export default function Navbar() {
   );
 }
 
-function UserProfile() {
+function UserProfile({ user }: { user: User }) {
+  console.log(user?.role);
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
@@ -111,12 +115,11 @@ function UserProfile() {
               <span>Profile</span>
             </Link>
           </DropdownMenuItem>
-          <DropdownMenuItem>
-
-          <Link href="/dashboard">
-          Dashboard
-          </Link>
-          </DropdownMenuItem>
+          {user && user.role === "ADMIN" && (
+            <DropdownMenuItem>
+              <Link href="/dashboard">Dashboard</Link>
+            </DropdownMenuItem>
+          )}
         </DropdownMenuGroup>
         <DropdownMenuSeparator />
         <DropdownMenuItem
@@ -130,3 +133,17 @@ function UserProfile() {
     </DropdownMenu>
   );
 }
+export const getServerSideProps: GetServerSideProps = async (req) => {
+  const session = await getSession(req);
+
+  let user = null;
+  if (session?.user) {
+    user = session.user;
+  }
+
+  return {
+    props: {
+      user,
+    },
+  };
+};

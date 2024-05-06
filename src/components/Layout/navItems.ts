@@ -1,11 +1,4 @@
-import {
-  Box,
-  FileDown,
-  LayoutDashboard,
-  LucideIcon,
-  Settings,
-  UsersRound,
-} from "lucide-react";
+import { Box, LayoutDashboard, LucideIcon, Settings } from "lucide-react";
 
 interface NavItem {
   title: string;
@@ -45,13 +38,13 @@ const adminItems: NavItem[] = [
   },
   {
     title: "Products",
-    href: "/products",
+    href: "/dashboard/products",
     icon: Box,
     variant: "ghost",
   },
   {
     title: "Settings",
-    href: "/settings",
+    href: "/dashboard/settings",
     icon: Settings,
     variant: "ghost",
   },

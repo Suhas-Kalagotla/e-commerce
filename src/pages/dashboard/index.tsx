@@ -16,6 +16,14 @@ export const getServerSideProps: GetServerSideProps = async (req) => {
       },
     };
   }
+  if (session.user?.role == "USER") {
+    return {
+      redirect: {
+        destination: "/",
+        permanent: false,
+      },
+    };
+  }
   return {
     props: {},
   };
